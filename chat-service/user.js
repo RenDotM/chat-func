@@ -9,6 +9,8 @@ const addUser = ({ id, name, room}) => {
     if (existingUser) {
         return {error: 'Username is already in use.'};
     }
+    if(!name || !room) return { error: 'Username and room are required.' };
+
 
     const user = {id, name, room};
 
@@ -21,11 +23,11 @@ const removeUser = (id) => {
     const index = users.findIndex((user)=> user.id === id);
 
     if(index !== -1) {
-        return users.slice(index,1)[0];
+        return users.splice(index,1)[0];
     }
 }
 
-const getUser = (id) => users.find((user) => user.id ===id);
+const getUser = (id) => users.find((user) => user.id === id);
 
 const getUserInRoom = (room) => users.filter((user)=> user.room ===room);
 
